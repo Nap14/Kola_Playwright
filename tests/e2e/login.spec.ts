@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe.only("Login", () => {
+test.describe("Login", () => {
   test("User can sign in", async ({ page }) => {
     await page.goto("https://conduit.mate.academy/user/login");
 
