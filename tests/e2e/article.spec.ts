@@ -1,8 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Article", () => {
-
-
   test.beforeEach(async ({ page }) => {
     await page.goto("https://conduit.mate.academy/user/login");
 

@@ -1,21 +1,20 @@
 import { test, expect } from "@playwright/test";
+import { LogInPage } from "../../app/pages/logIn.page";
 
 test.describe("Login", () => {
   test("User can sign in", async ({ page }) => {
-    await page.goto("https://conduit.mate.academy/user/login");
+    const loginPage = new LogInPage(page);
 
-    const emailField = page.getByPlaceholder(/Email/);
-    const passwordField = page.getByPlaceholder("Password");
-    const submitBtn = page.getByRole("button", { name: "Sign in" });
+    await loginPage.visit();
 
-    await emailField.fill("nikolandre14@gmail.com");
-    await passwordField.fill("12345678");
-    await submitBtn.click();
+    await loginPage.signIn("nikolandre14@gmail.com", "12345678");
 
     await expect(page).toHaveURL("https://conduit.mate.academy");
 
-    const profile = page.locator(".nav-link", { has: page.locator(".user-pic") });
+    const profile = page.locator(".nav-link", {
+      has: page.locator(".user-pic"),
+    });
     await expect(profile).toBeVisible();
-    await expect(profile).toContainText("nap1408")
+    await expect(profile).toContainText("nap1408");
   });
 });
